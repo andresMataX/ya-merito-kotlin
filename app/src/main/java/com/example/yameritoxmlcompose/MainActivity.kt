@@ -45,8 +45,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-@Composable
-fun Hello() {
-    Text(text = "El pepe")
-}
