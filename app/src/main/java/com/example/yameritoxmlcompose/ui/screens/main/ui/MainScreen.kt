@@ -17,11 +17,7 @@ fun MainScreen(navController: NavHostController, mainViewModel: MainViewModel) {
     val lat: String by mainViewModel.lat.observeAsState(initial = "")
 
     Column {
-        Text(text = "AAAAAA mi pichula1")
-        Text(text = lat)
-        TextField(value = lat, onValueChange = {
-            mainViewModel.onLocationChange(it)
-        })
+        Text(text = "MainScreen")
         Button(onClick = {
             navController.navigate(route = AppScreens.ConfirmScreen.route)
         }) {

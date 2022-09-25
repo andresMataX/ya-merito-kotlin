@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 import com.example.yameritoxmlcompose.R
+import com.example.yameritoxmlcompose.ui.screens.main.ui.MainViewModel
 
 class LocalizationFragment : Fragment() {
 

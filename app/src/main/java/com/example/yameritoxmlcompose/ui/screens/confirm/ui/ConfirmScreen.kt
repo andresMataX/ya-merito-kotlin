@@ -10,7 +10,7 @@ import com.example.yameritoxmlcompose.ui.navigation.AppScreens
 @Composable
 fun ConfirmScreen(navController: NavHostController) {
     Column {
-        Text(text = "ooooo")
+        Text(text = "ConfirmScreen")
         Button(onClick = {
             navController.popBackStack()
         }) {
