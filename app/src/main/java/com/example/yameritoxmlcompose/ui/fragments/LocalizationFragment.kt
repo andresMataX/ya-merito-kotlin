@@ -24,6 +24,10 @@ class LocalizationFragment : Fragment() {
     private val LOG_TAG = "EnviarUbicacion"
     private var haConcedidoPermisos = false
 
+    companion object {
+        fun newInstance() = LocalizationFragment()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         verificarPermisos()
