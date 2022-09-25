@@ -7,15 +7,14 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    private val _lat = MutableLiveData<Double>()
-    val lat: LiveData<Double> = _lat
+    private val _lat = MutableLiveData<String>()
+    val lat: LiveData<String> = _lat
 
     private val _lon = MutableLiveData<Double>()
     val lon: LiveData<Double> = _lon
 
-    fun onLocationChange(location: Location) {
-        _lat.value = location.latitude
-        _lon.value = location.longitude
+    fun onLocationChange(lat: String) {
+        _lat.value = lat
     }
 
 }
