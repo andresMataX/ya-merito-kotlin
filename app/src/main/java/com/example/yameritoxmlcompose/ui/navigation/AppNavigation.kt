@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.yameritoxmlcompose.ui.screens.confirm.ui.ConfirmScreen
+import com.example.yameritoxmlcompose.ui.screens.confirm.ui.ConfirmViewModel
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainScreen
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainViewModel
 
@@ -23,7 +24,11 @@ fun AppNavigation() {
                 type = NavType.StringType
             })
         ) {
-            ConfirmScreen(navController, confirmViewModel = ConfirmViewModel(),it.arguments?.getString("text"))
+            ConfirmScreen(
+                navController,
+                confirmViewModel = ConfirmViewModel(),
+                it.arguments?.getString("text")
+            )
         }
     }
 }
