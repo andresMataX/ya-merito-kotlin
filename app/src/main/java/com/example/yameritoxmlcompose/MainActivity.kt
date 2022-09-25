@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationFragment
 
 class MainActivity : AppCompatActivity() {
