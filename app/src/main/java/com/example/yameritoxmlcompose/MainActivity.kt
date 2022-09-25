@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val hello = findViewById<ComposeView>(R.id.hello)
+        hello.setContent {
+            Hello()
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, LocalizationFragment.newInstance())
