@@ -1,10 +1,15 @@
 package com.example.yameritoxmlcompose
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.ui.platform.ComposeView
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationFragment
 
@@ -15,7 +20,18 @@ class MainActivity : AppCompatActivity() {
 
         val hello = findViewById<ComposeView>(R.id.hello)
         hello.setContent {
-            Hello()
+            MaterialTheme {
+                Column {
+                    Hello()
+                }
+                
+            }
+        }
+
+        val buttonNavegar = findViewById<Button>(R.id.buttonNavegar)
+        buttonNavegar.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
         }
 
         if (savedInstanceState == null) {
