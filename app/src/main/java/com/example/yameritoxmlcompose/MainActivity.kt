@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationFragment
+import com.example.yameritoxmlcompose.ui.navigation.AppNavigation
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     color = Color.White
                 ) {
                     // TODO: Navigation Drawer
-                    Hello()
+                    AppNavigation()
                 }
                 
             }
