@@ -1,20 +1,19 @@
 package com.example.yameritoxmlcompose.ui.screens.main.ui
 
-import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    private val _lat = MutableLiveData<String>()
-    val lat: LiveData<String> = _lat
+    private val _address = MutableLiveData<String>()
+    val address: LiveData<String> = _address
 
-    private val _lon = MutableLiveData<Double>()
-    val lon: LiveData<Double> = _lon
+    private val _nextEnable = MutableLiveData<Boolean>()
+    val nextEnable: LiveData<Boolean> = _nextEnable
 
-    fun onLocationChange(lat: String) {
-        _lat.value = lat
+    fun onAddressChange(address: String) {
+        _address.value = address
+        _nextEnable.value = address.isNotEmpty()
     }
-
 }
