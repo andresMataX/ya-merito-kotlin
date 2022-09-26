@@ -28,6 +28,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.yameritoxmlcompose.R
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun MainScreen(
@@ -79,13 +83,13 @@ fun Main(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Mapa
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize(0.5f)
-                .background(Color.Magenta)
-        ) { }
-//         MyGoogleMaps()
+//        Box(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .fillMaxSize(0.5f)
+//                .background(Color.Magenta)
+//        ) { }
+         MyGoogleMaps(localizationViewModel)
 
         // Formulario Main
         FormMain(maliFamiliy, address, { mainViewModel.onAddressChange(it) }, localizationViewModel)
@@ -97,10 +101,12 @@ fun Main(
     }
 }
 
-/*@Composable
-fun MyGoogleMaps() {
+@Composable
+fun MyGoogleMaps(localizationViewModel: LocalizationViewModel) {
 
-    val marker = LatLng(25.7250337, -100.3156971)
+    val lat: Double by localizationViewModel.lat.observeAsState(0.0)
+
+    val marker = LatLng(lat, -100.3156971)
 
     val cameraPosition = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(marker, 13f)
@@ -120,7 +126,7 @@ fun MyGoogleMaps() {
 
     }
 }
-*/
+
 @Composable
 fun FormMain(
     maliFamiliy: FontFamily,
