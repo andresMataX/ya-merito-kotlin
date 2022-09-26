@@ -10,6 +10,7 @@ import com.example.yameritoxmlcompose.ui.screens.confirm.ui.ConfirmScreen
 import com.example.yameritoxmlcompose.ui.screens.confirm.ui.ConfirmViewModel
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainScreen
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainViewModel
+import com.example.yameritoxmlcompose.ui.screens.success.ui.SuccessScreen
 
 @Composable
 fun AppNavigation() {
@@ -29,6 +30,9 @@ fun AppNavigation() {
                 confirmViewModel = ConfirmViewModel(),
                 it.arguments?.getString("text")
             )
+        }
+        composable(route = AppScreens.SuccessScreen.route) {
+            SuccessScreen(navController = navController)
         }
     }
 }
