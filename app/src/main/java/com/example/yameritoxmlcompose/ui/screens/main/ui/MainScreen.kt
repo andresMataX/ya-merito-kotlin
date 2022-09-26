@@ -129,8 +129,8 @@ fun MyGoogleMaps(localizationViewModel: LocalizationViewModel) {
         cameraPosition.move(CameraUpdateFactory.newLatLng(LatLng(lat, lon)))
         Marker(
             position = marker,
-            title = "Micasa",
-            snippet = "micasacompañera",
+            title = "Mi Ubicación",
+            snippet = "¡Hey! Este eres tú 😸👍",
         )
     }
 }
