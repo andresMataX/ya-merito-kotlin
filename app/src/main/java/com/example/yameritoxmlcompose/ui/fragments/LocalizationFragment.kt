@@ -22,7 +22,7 @@ class LocalizationFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
 
-    private val localizationViewModel : LocalizationViewModel by activityViewModels()
+    private val localizationViewModel: LocalizationViewModel by activityViewModels()
 
     private val CODIGO_PERMISOS_UBICACION_SEGUNDO_PLANO = 2106
     private val LOG_TAG = "EnviarUbicacion"
@@ -72,7 +72,7 @@ class LocalizationFragment : Fragment() {
                     Log.d(LOG_TAG, "Se recibió una actualización")
                     for (location in p0.locations) {
                         imprimirUbicacion(location)
-                        localizationViewModel.onChangeLat(location.latitude)
+                        localizationViewModel.onChangeLat(location.latitude, location.longitude)
                     }
                 }
             }

@@ -31,6 +31,7 @@ import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
@@ -105,8 +106,9 @@ fun Main(
 fun MyGoogleMaps(localizationViewModel: LocalizationViewModel) {
 
     val lat: Double by localizationViewModel.lat.observeAsState(0.0)
+    val lon: Double by localizationViewModel.lon.observeAsState(0.0)
 
-    val marker = LatLng(lat, -100.3156971)
+    val marker = LatLng(lat, lon)
 
     val cameraPosition = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(marker, 13f)
@@ -123,7 +125,11 @@ fun MyGoogleMaps(localizationViewModel: LocalizationViewModel) {
             ),
         cameraPositionState = cameraPosition,
     ) {
-
+        Marker(
+            position = marker,
+            title = "Micasa",
+            snippet = "micasacompañera",
+        )
     }
 }
 
@@ -149,9 +155,10 @@ fun FormMain(
 fun AddressLabel(maliFamiliy: FontFamily, localizationViewModel: LocalizationViewModel) {
 
     val address: Double by localizationViewModel.lat.observeAsState(0.0)
+    val address2: Double by localizationViewModel.lon.observeAsState(0.0)
 
     Text(
-        text = "¿A dónde vamos? $address",
+        text = "¿A dónde vamos? $address $address2",
         fontSize = 24.sp,
         fontFamily = maliFamiliy,
         fontWeight = FontWeight.Bold

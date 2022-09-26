@@ -8,8 +8,12 @@ class LocalizationViewModel : ViewModel() {
 
     private val _lat = MutableLiveData<Double>()
     val lat: LiveData<Double> = _lat
+    
+    private val _lon = MutableLiveData<Double>()
+    val lon: LiveData<Double> = _lon
 
-    fun onChangeLat(latLocation: Double) {
+    fun onChangeLat(latLocation: Double, lonLocation: Double) {
         _lat.value = latLocation
+        _lon.value = lonLocation
     }
 }
