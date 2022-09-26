@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.yameritoxmlcompose.R
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -125,6 +126,7 @@ fun MyGoogleMaps(localizationViewModel: LocalizationViewModel) {
             ),
         cameraPositionState = cameraPosition,
     ) {
+        cameraPosition.move(CameraUpdateFactory.newLatLng(LatLng(lat, lon)))
         Marker(
             position = marker,
             title = "Micasa",
