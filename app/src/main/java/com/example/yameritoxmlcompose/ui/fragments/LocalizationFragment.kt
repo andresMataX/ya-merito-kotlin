@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.gms.location.*
 import com.example.yameritoxmlcompose.R
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainViewModel
@@ -20,6 +21,8 @@ class LocalizationFragment : Fragment() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
+
+    private val localizationViewModel : LocalizationViewModel by activityViewModels()
 
     private val CODIGO_PERMISOS_UBICACION_SEGUNDO_PLANO = 2106
     private val LOG_TAG = "EnviarUbicacion"
@@ -69,6 +72,7 @@ class LocalizationFragment : Fragment() {
                     Log.d(LOG_TAG, "Se recibió una actualización")
                     for (location in p0.locations) {
                         imprimirUbicacion(location)
+                        localizationViewModel.onChangeLat(location.latitude)
                     }
                 }
             }

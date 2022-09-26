@@ -14,7 +14,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavHostController
 import com.example.yameritoxmlcompose.ui.navigation.AppScreens
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,9 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.yameritoxmlcompose.R
+import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
 
 @Composable
-fun MainScreen(navController: NavHostController, mainViewModel: MainViewModel) {
+fun MainScreen(
+    navController: NavHostController,
+    mainViewModel: MainViewModel,
+    localizationViewModel: LocalizationViewModel
+) {
 
     val maliFamiliy = FontFamily(
         Font(R.font.mali_bold, FontWeight.Bold),
@@ -54,12 +58,17 @@ fun MainScreen(navController: NavHostController, mainViewModel: MainViewModel) {
             .padding(top = 48.dp, start = 40.dp, end = 40.dp)
             .background(color = Color.White)
     ) {
-        Main(maliFamiliy, navController, mainViewModel)
+        Main(maliFamiliy, navController, mainViewModel, localizationViewModel)
     }
 }
 
 @Composable
-fun Main(maliFamiliy: FontFamily, navController: NavHostController, mainViewModel: MainViewModel) {
+fun Main(
+    maliFamiliy: FontFamily,
+    navController: NavHostController,
+    mainViewModel: MainViewModel,
+    localizationViewModel: LocalizationViewModel
+) {
 
     val address: String by mainViewModel.address.observeAsState(initial = "")
     val nextEnable: Boolean by mainViewModel.nextEnable.observeAsState(initial = false)
@@ -79,7 +88,7 @@ fun Main(maliFamiliy: FontFamily, navController: NavHostController, mainViewMode
 //         MyGoogleMaps()
 
         // Formulario Main
-        FormMain(maliFamiliy, address) { mainViewModel.onAddressChange(it) }
+        FormMain(maliFamiliy, address, { mainViewModel.onAddressChange(it) }, localizationViewModel)
 
         // Favoritos
         // TODO: Destinos favoritos
@@ -113,23 +122,30 @@ fun MyGoogleMaps() {
 }
 */
 @Composable
-fun FormMain(maliFamiliy: FontFamily, address: String, onAddressChange: (String) -> Unit) {
+fun FormMain(
+    maliFamiliy: FontFamily,
+    address: String,
+    onAddressChange: (String) -> Unit,
+    localizationViewModel: LocalizationViewModel
+) {
 
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
         Column {
-            AddressLabel(maliFamiliy)
+            AddressLabel(maliFamiliy, localizationViewModel)
             AddressField(maliFamiliy, address) { onAddressChange(it) }
         }
     }
 }
 
 @Composable
-fun AddressLabel(maliFamiliy: FontFamily) {
+fun AddressLabel(maliFamiliy: FontFamily, localizationViewModel: LocalizationViewModel) {
+
+    val address: Double by localizationViewModel.lat.observeAsState(0.0)
 
     Text(
-        text = "¿A dónde vamos?",
+        text = "¿A dónde vamos? $address",
         fontSize = 24.sp,
         fontFamily = maliFamiliy,
         fontWeight = FontWeight.Bold
