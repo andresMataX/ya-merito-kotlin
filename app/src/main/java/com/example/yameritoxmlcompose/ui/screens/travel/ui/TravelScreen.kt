@@ -56,7 +56,7 @@ fun TravelScreen(
             .padding(top = 48.dp, start = 40.dp, end = 40.dp)
             .background(color = Color.White)
     ) {
-        Travel(navController, maliFamiliy, text, localizationViewModel, confirmViewModel)
+        Travel(navController, maliFamiliy, text, localizationViewModel, confirmViewModel, range)
     }
 }
 
@@ -66,7 +66,8 @@ fun Travel(
     maliFamiliy: FontFamily,
     text: String?,
     localizationViewModel: LocalizationViewModel,
-    confirmViewModel: ConfirmViewModel
+    confirmViewModel: ConfirmViewModel,
+    range: String?
 ) {
     Column(
         modifier = Modifier
@@ -77,7 +78,7 @@ fun Travel(
         Spacer(modifier = Modifier.height(104.dp))
         IconoBus()
         Spacer(modifier = Modifier.height(80.dp))
-        EstatusViaje(maliFamiliy, text, localizationViewModel)
+        EstatusViaje(maliFamiliy, text, localizationViewModel, range)
         Spacer(modifier = Modifier.height(48.dp))
         IconoCancelar(navController)
     }
@@ -104,7 +105,8 @@ fun IconoCancelar(navController: NavController) {
 fun EstatusViaje(
     maliFamiliy: FontFamily,
     text: String?,
-    localizationViewModel: LocalizationViewModel
+    localizationViewModel: LocalizationViewModel,
+    range: String?
 ) {
 
     val latUser: Double by localizationViewModel.lat.observeAsState(0.0)
@@ -143,7 +145,7 @@ fun EstatusViaje(
             color = Color.Black,
         )
         Text(
-            text = "Rango seleccionado: 1500m",
+            text = "Rango seleccionado: ${range}m",
             fontSize = 16.sp,
             fontFamily = maliFamiliy,
             color = Color.Black,
