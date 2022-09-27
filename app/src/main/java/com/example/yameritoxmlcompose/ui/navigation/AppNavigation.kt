@@ -12,6 +12,7 @@ import com.example.yameritoxmlcompose.ui.screens.confirm.ui.ConfirmViewModel
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainScreen
 import com.example.yameritoxmlcompose.ui.screens.main.ui.MainViewModel
 import com.example.yameritoxmlcompose.ui.screens.success.ui.SuccessScreen
+import com.example.yameritoxmlcompose.ui.screens.travel.ui.TravelScreen
 
 @Composable
 fun AppNavigation(localizationViewModel: LocalizationViewModel) {
@@ -30,6 +31,18 @@ fun AppNavigation(localizationViewModel: LocalizationViewModel) {
                 navController,
                 confirmViewModel = ConfirmViewModel(),
                 it.arguments?.getString("text"),
+                localizationViewModel
+            )
+        }
+        composable(
+            route = AppScreens.TravelScreen.route + "/{destino}",
+            arguments = listOf(navArgument(name = "destino") {
+                type = NavType.StringType
+            })
+        ) {
+            TravelScreen(
+                navController,
+                it.arguments?.getString("destino"),
                 localizationViewModel
             )
         }
