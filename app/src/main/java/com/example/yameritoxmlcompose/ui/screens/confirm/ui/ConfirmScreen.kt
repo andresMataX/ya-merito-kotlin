@@ -30,7 +30,12 @@ import androidx.navigation.NavController
 import com.example.yameritoxmlcompose.R
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
 import com.example.yameritoxmlcompose.ui.navigation.AppScreens
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.Circle
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun ConfirmScreen(
@@ -80,13 +85,13 @@ fun Confirm(
             .fillMaxSize()
     ) {
         // Mapa
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize(0.5f)
-                .background(Color.Magenta)
-        ) { }
-//        MyGoogleMaps(confirmViewModel)
+//        Box(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .fillMaxSize(0.5f)
+//                .background(Color.Magenta)
+//        ) { }
+        MyGoogleMaps(confirmViewModel)
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -95,7 +100,7 @@ fun Confirm(
     }
 }
 
-/*@Composable
+@Composable
 fun MyGoogleMaps(confirmViewModel: ConfirmViewModel) {
 
     val range: Int by confirmViewModel.range.observeAsState(initial = 1500)
@@ -131,7 +136,7 @@ fun MyGoogleMaps(confirmViewModel: ConfirmViewModel) {
         )
     }
 }
-*/
+
 @Composable
 fun FormConfirm(
     maliFamiliy: FontFamily,
@@ -275,7 +280,7 @@ fun InputZona(
     BasicTextField(
         value = localRange.toString(),
         onValueChange = {
-            if (it.isNotEmpty() && it.length < 6) {
+            if (it.isNotEmpty() && it.length < 5) {
                 localRange = it.toInt()
             } else {
                 localRange = 0
@@ -302,7 +307,7 @@ fun InputZona(
             keyboardType = KeyboardType.Number
         ),
         keyboardActions = KeyboardActions(onSend = {
-            // TODO: Validación de no menos de 500 m y no más de 10,000m XD?
+            // TODO: Validación de no menos de 500 m y no más de 9999m
             onRangeChange(localRange)
             onSendChange(true)
         })
