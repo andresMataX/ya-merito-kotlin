@@ -346,7 +346,7 @@ fun BotonFormAceptar(
 
     TextButton(
         onClick = {
-            navController.navigate(route = AppScreens.TravelScreen.route + "/$text" + "$range")
+            navController.navigate(route = AppScreens.TravelScreen.route + "/$text" + "/$range")
         },
         border = BorderStroke(1.dp, Color.Black)
     ) {

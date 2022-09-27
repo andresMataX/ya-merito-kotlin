@@ -35,10 +35,15 @@ fun AppNavigation(localizationViewModel: LocalizationViewModel) {
             )
         }
         composable(
-            route = AppScreens.TravelScreen.route + "/{destino}",
-            arguments = listOf(navArgument(name = "destino") {
-                type = NavType.StringType
-            })
+            route = AppScreens.TravelScreen.route + "/{destino}/{rango}",
+            arguments = listOf(
+                navArgument(name = "destino") {
+                    type = NavType.StringType
+                },
+                navArgument(name = "rango") {
+                    type = NavType.StringType
+                },
+            )
         ) {
             TravelScreen(
                 navController,
