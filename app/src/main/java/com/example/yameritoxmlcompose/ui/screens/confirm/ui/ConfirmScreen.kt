@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.yameritoxmlcompose.R
 import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
+import com.example.yameritoxmlcompose.ui.navigation.AppScreens
 import com.google.android.gms.maps.model.LatLng
 
 @Composable
@@ -146,18 +147,18 @@ fun FormConfirm(
         DestinoFormConfirm(maliFamiliy, text, localizationViewModel)
         ZonaFormConfirm(maliFamiliy, confirmViewModel)
         Spacer(modifier = Modifier.height(80.dp))
-        ButtonsConfirm(maliFamiliy, navController)
+        ButtonsConfirm(maliFamiliy, navController, text)
     }
 }
 
 @Composable
-fun ButtonsConfirm(maliFamiliy: FontFamily, navController: NavController) {
+fun ButtonsConfirm(maliFamiliy: FontFamily, navController: NavController, text: String?) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         BotonFormCancelar(maliFamiliy, navController)
-        BotonFormAceptar(maliFamiliy)
+        BotonFormAceptar(maliFamiliy, navController, text)
     }
 }
 
@@ -191,12 +192,6 @@ fun DestinoFormConfirm(
             fontFamily = maliFamiliy,
             color = Color.Black,
             fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "Distancia con FIME $distancia",
-            fontSize = 24.sp,
-            fontFamily = maliFamiliy,
-            fontWeight = FontWeight.Bold
         )
         InputDestino(text, maliFamiliy)
     }
@@ -335,9 +330,11 @@ fun BotonFormCancelar(maliFamiliy: FontFamily, navController: NavController) {
 }
 
 @Composable
-fun BotonFormAceptar(maliFamiliy: FontFamily) {
+fun BotonFormAceptar(maliFamiliy: FontFamily, navController: NavController, text: String?) {
     TextButton(
-        onClick = { },
+        onClick = {
+            navController.navigate(route = AppScreens.TravelScreen.route + "/$text")
+        },
         border = BorderStroke(1.dp, Color.Black)
     ) {
         Row(
