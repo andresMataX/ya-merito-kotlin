@@ -43,7 +43,9 @@ fun AppNavigation(localizationViewModel: LocalizationViewModel) {
             TravelScreen(
                 navController,
                 it.arguments?.getString("destino"),
-                localizationViewModel
+                it.arguments?.getString("rango"),
+                localizationViewModel,
+                confirmViewModel = ConfirmViewModel(),
             )
         }
         composable(route = AppScreens.SuccessScreen.route) {

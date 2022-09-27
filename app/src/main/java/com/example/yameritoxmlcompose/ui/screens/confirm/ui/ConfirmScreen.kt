@@ -147,18 +147,23 @@ fun FormConfirm(
         DestinoFormConfirm(maliFamiliy, text, localizationViewModel)
         ZonaFormConfirm(maliFamiliy, confirmViewModel)
         Spacer(modifier = Modifier.height(80.dp))
-        ButtonsConfirm(maliFamiliy, navController, text)
+        ButtonsConfirm(maliFamiliy, navController, text, confirmViewModel)
     }
 }
 
 @Composable
-fun ButtonsConfirm(maliFamiliy: FontFamily, navController: NavController, text: String?) {
+fun ButtonsConfirm(
+    maliFamiliy: FontFamily,
+    navController: NavController,
+    text: String?,
+    confirmViewModel: ConfirmViewModel
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         BotonFormCancelar(maliFamiliy, navController)
-        BotonFormAceptar(maliFamiliy, navController, text)
+        BotonFormAceptar(maliFamiliy, navController, text, confirmViewModel)
     }
 }
 
@@ -330,10 +335,18 @@ fun BotonFormCancelar(maliFamiliy: FontFamily, navController: NavController) {
 }
 
 @Composable
-fun BotonFormAceptar(maliFamiliy: FontFamily, navController: NavController, text: String?) {
+fun BotonFormAceptar(
+    maliFamiliy: FontFamily,
+    navController: NavController,
+    text: String?,
+    confirmViewModel: ConfirmViewModel
+) {
+
+    val range: Int by confirmViewModel.range.observeAsState(initial = 1500)
+
     TextButton(
         onClick = {
-            navController.navigate(route = AppScreens.TravelScreen.route + "/$text")
+            navController.navigate(route = AppScreens.TravelScreen.route + "/$text" + "$range")
         },
         border = BorderStroke(1.dp, Color.Black)
     ) {
