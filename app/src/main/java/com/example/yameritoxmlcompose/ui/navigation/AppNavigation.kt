@@ -29,7 +29,8 @@ fun AppNavigation(localizationViewModel: LocalizationViewModel) {
             ConfirmScreen(
                 navController,
                 confirmViewModel = ConfirmViewModel(),
-                it.arguments?.getString("text")
+                it.arguments?.getString("text"),
+                localizationViewModel
             )
         }
         composable(route = AppScreens.SuccessScreen.route) {

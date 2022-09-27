@@ -8,11 +8,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,12 +27,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.yameritoxmlcompose.R
-import com.example.yameritoxmlcompose.ui.navigation.AppScreens
+import com.example.yameritoxmlcompose.ui.fragments.LocalizationViewModel
+import com.google.android.gms.maps.model.LatLng
 
 @Composable
-fun ConfirmScreen(navController: NavController, confirmViewModel: ConfirmViewModel, text: String?) {
+fun ConfirmScreen(
+    navController: NavController,
+    confirmViewModel: ConfirmViewModel,
+    text: String?,
+    localizationViewModel: LocalizationViewModel
+) {
 
     val maliFamiliy = FontFamily(
         Font(R.font.mali_bold, FontWeight.Bold),
@@ -56,7 +61,7 @@ fun ConfirmScreen(navController: NavController, confirmViewModel: ConfirmViewMod
             .padding(top = 48.dp, start = 40.dp, end = 40.dp)
             .background(color = Color.White)
     ) {
-        Confirm(navController, confirmViewModel, maliFamiliy, text)
+        Confirm(navController, confirmViewModel, maliFamiliy, text, localizationViewModel)
     }
 }
 
@@ -65,7 +70,8 @@ fun Confirm(
     navController: NavController,
     confirmViewModel: ConfirmViewModel,
     maliFamiliy: FontFamily,
-    text: String?
+    text: String?,
+    localizationViewModel: LocalizationViewModel
 ) {
     // Confirm
     Column(
@@ -84,7 +90,7 @@ fun Confirm(
         Spacer(modifier = Modifier.height(16.dp))
 
         // FormConfirm
-        FormConfirm(maliFamiliy, navController, confirmViewModel, text)
+        FormConfirm(maliFamiliy, navController, confirmViewModel, text, localizationViewModel)
     }
 }
 
@@ -130,13 +136,14 @@ fun FormConfirm(
     maliFamiliy: FontFamily,
     navController: NavController,
     confirmViewModel: ConfirmViewModel,
-    text: String?
+    text: String?,
+    localizationViewModel: LocalizationViewModel
 ) {
 
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        DestinoFormConfirm(maliFamiliy, text)
+        DestinoFormConfirm(maliFamiliy, text, localizationViewModel)
         ZonaFormConfirm(maliFamiliy, confirmViewModel)
         Spacer(modifier = Modifier.height(80.dp))
         ButtonsConfirm(maliFamiliy, navController)
@@ -155,7 +162,25 @@ fun ButtonsConfirm(maliFamiliy: FontFamily, navController: NavController) {
 }
 
 @Composable
-fun DestinoFormConfirm(maliFamiliy: FontFamily, text: String?) {
+fun DestinoFormConfirm(
+    maliFamiliy: FontFamily,
+    text: String?,
+    localizationViewModel: LocalizationViewModel
+) {
+
+    val markerFIME = LatLng(25.7250337, -100.3156971)
+
+    val latUser: Double by localizationViewModel.lat.observeAsState(0.0)
+    val lonUser: Double by localizationViewModel.lon.observeAsState(0.0)
+
+    localizationViewModel.onChangeCoordenadas(
+        latUser,
+        lonUser,
+        markerFIME.latitude,
+        markerFIME.longitude
+    )
+
+    val distancia: Double by localizationViewModel.distancia.observeAsState(0.0)
 
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -166,6 +191,12 @@ fun DestinoFormConfirm(maliFamiliy: FontFamily, text: String?) {
             fontFamily = maliFamiliy,
             color = Color.Black,
             fontWeight = FontWeight.Bold,
+        )
+        Text(
+            text = "Distancia con FIME $distancia",
+            fontSize = 24.sp,
+            fontFamily = maliFamiliy,
+            fontWeight = FontWeight.Bold
         )
         InputDestino(text, maliFamiliy)
     }

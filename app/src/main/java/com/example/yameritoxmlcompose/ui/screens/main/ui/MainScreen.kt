@@ -156,11 +156,11 @@ fun FormMain(
 @Composable
 fun AddressLabel(maliFamiliy: FontFamily, localizationViewModel: LocalizationViewModel) {
 
-    val address: Double by localizationViewModel.lat.observeAsState(0.0)
-    val address2: Double by localizationViewModel.lon.observeAsState(0.0)
+    val latUser: Double by localizationViewModel.lat.observeAsState(0.0)
+    val lonUser: Double by localizationViewModel.lon.observeAsState(0.0)
 
     Text(
-        text = "¿A dónde vamos? $address $address2",
+        text = "¿A dónde vamos? $latUser $lonUser",
         fontSize = 24.sp,
         fontFamily = maliFamiliy,
         fontWeight = FontWeight.Bold
