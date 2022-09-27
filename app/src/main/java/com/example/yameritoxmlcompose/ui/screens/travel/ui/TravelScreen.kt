@@ -7,6 +7,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -60,10 +61,15 @@ fun Travel(
     text: String?,
     localizationViewModel: LocalizationViewModel
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Header(maliFamiliy)
         Spacer(modifier = Modifier.height(104.dp))
         IconoBus()
+        Spacer(modifier = Modifier.height(80.dp))
         EstatusViaje(maliFamiliy, text)
         Spacer(modifier = Modifier.height(48.dp))
         IconoCancelar(navController)
@@ -81,8 +87,8 @@ fun IconoCancelar(navController: NavController) {
             contentDescription = "Cancelar",
             tint = Color.Black,
             modifier = Modifier
-                .height(100.dp)
-                .width(100.dp)
+                .height(50.dp)
+                .width(50.dp)
         )
     }
 }
@@ -90,34 +96,37 @@ fun IconoCancelar(navController: NavController) {
 @Composable
 fun EstatusViaje(maliFamiliy: FontFamily, text: String?) {
 
-    Text(
-        text = "Destino",
-        fontSize = 20.sp,
-        fontFamily = maliFamiliy,
-        color = Color.Black
-    )
-    Text(
-        text = text!!,
-        fontSize = 32.sp,
-        fontFamily = maliFamiliy,
-        color = Color.Black,
-        fontWeight = FontWeight.Light
-    )
-    Text(
-        // TODO: Cambiar por la distancia
-        text = "Distancia con el destino: 6.2km",
-        fontSize = 16.sp,
-        fontFamily = maliFamiliy,
-        color = Color.Black,
-    )
-    Text(
-        // TODO: Cambiar por el rango
-        text = "Rango seleccionado: 1.5km",
-        fontSize = 16.sp,
-        fontFamily = maliFamiliy,
-        color = Color.Black,
-        fontWeight = FontWeight.ExtraLight
-    )
+    Column {
+        Text(
+            text = "Destino",
+            fontSize = 20.sp,
+            fontFamily = maliFamiliy,
+            color = Color.Black,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = text!!,
+            fontSize = 24.sp,
+            fontFamily = maliFamiliy,
+            color = Color.Black,
+            fontWeight = FontWeight.Light
+        )
+        Text(
+            // TODO: Cambiar por la distancia
+            text = "Distancia con el destino: 6.2km",
+            fontSize = 16.sp,
+            fontFamily = maliFamiliy,
+            color = Color.Black,
+        )
+        Text(
+            // TODO: Cambiar por el rango
+            text = "Rango seleccionado: 1.5km",
+            fontSize = 16.sp,
+            fontFamily = maliFamiliy,
+            color = Color.Black,
+            fontWeight = FontWeight.ExtraLight
+        )
+    }
 }
 
 @Composable
